@@ -1,0 +1,19 @@
+[project]
+name = "officemath2latex"
+version = "0.1.0"
+description = "OfficeMath (OMML) to LaTeX converter"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "lxml>=4.9",
+]
+
+[project.scripts]
+officemath2latex = "main:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["officemath2latex", "main"]
