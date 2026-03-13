@@ -2,6 +2,8 @@
 
 ## 0.1.1 (2026-03-13)
 
+- Added MIT License
+
 ### Features
 
 - Added support for special tokens in `m:t`, including `_^{}`

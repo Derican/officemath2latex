@@ -7,3 +7,7 @@ To use from PyPI:
 ```sh
 pip install officemath2latex
 ```
+
+## License
+
+MIT
