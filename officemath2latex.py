@@ -213,7 +213,7 @@ class OfficeMathRun(OfficeMathElement):
                 if el.get(qname("xml", "space")) == "preserve":
                     math_string += "\\ \\ " if text_content == "" else OfficeMathFieldCodeText(text_content).process(chr_)
                 else:
-                    math_string += text_content
+                    math_string += text_content.replace("_", "\\_").replace("^", "\\^").replace("{", "\\{").replace("}", "\\}")
 
         replacements = [
             (r"π", r"\pi "),
@@ -284,6 +284,10 @@ class OfficeMathRun(OfficeMathElement):
             (r"∛", r"\sqrt[3]{} "),
             (r"∜", r"\sqrt[4]{} "),
             (r"≜", r"\triangleq "),
+            (r"<", r"\lt "),
+            (r">", r"\gt "),
+            (r"|", r"\mid "),
+            (r"∣", r"\mid "),
         ]
 
         for pre, post in replacements:
@@ -418,7 +422,7 @@ class OfficeMathLimLowerUpper(OfficeMathElement):
                 if element_string.strip() == "lim":
                     math_string += "\\" + element_string.strip()
                 else:
-                    math_string += element_string
+                    math_string += f'\\mathop{{{element_string.strip()}}}\\limits'
             elif el.tag == qname("m", "lim"):
                 math_string += f"{type_}{{{OfficeMathNode(el).process(chr_)}}}"
         return math_string
@@ -627,7 +631,7 @@ class OfficeMathText(OfficeMathElement):
         if self.node.get(qname("xml", "space")) == "preserve":
             return "\\ \\ " if text_content == "" else OfficeMathFieldCodeText(text_content).process(chr_)
         else:
-            return text_content
+            return text_content.replace("_", "\\_").replace("^", "\\^").replace("{", "\\{").replace("}", "\\}")
 
 
 @dataclass
